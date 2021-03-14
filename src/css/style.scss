@@ -51,6 +51,7 @@ $form-height: 200px;
 }
 
 .chat {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     width: 600px;
@@ -97,6 +98,29 @@ $form-height: 200px;
         &:active, &:focus {
             outline: none;
             border-width: 3px;
+        }
+    }
+
+    &__members {
+        position: absolute;
+        width: 200px;
+        height: fit-content;
+        top: 5%;
+        left: -34%;
+        border: 3px solid black;
+        border-right: none;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        padding: 10px;
+    }
+
+    &__member {
+        display: flex;
+        align-items: center;
+        background-color: yellow;
+
+        &:nth-child(n + 2) {
+            margin-top: 10px;
         }
     }
 }
