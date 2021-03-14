@@ -1,1 +1,3 @@
-document.body.textContent = 'Hello World!!!';
+import './css/style.scss';
+
+console.log('hello world');
