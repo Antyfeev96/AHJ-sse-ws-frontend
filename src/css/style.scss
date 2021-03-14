@@ -17,7 +17,6 @@ $form-height: 200px;
     margin-top: 200px;
     padding: 15px;
     left: calc(50% - #{$form-width}/2);
-    background-color: rgb(204, 195, 195);
     border: 3px solid black;
     border-radius: 15px;
     font-size: 20px;
@@ -48,5 +47,48 @@ $form-height: 200px;
             font-weight: bold;
             cursor: pointer;
         }
+    }
+}
+
+.chat {
+    display: flex;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 500px;
+    margin: 100px auto 0 auto;
+    padding: 20px;
+    border: 3px solid black;
+    border-radius: 15px;
+
+    &__messages {
+        height: fit-content;
+    }
+
+    &__message {
+        width: 400px;
+        background-color: white;
+        height: fit-content;
+
+        &:nth-child(n + 2) {
+            margin-top: 15px;
+        }
+    }
+
+    &__name {
+        color: grey;
+        font-size: 12px;
+    }
+
+    &__article {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    &__input {
+        margin-top: 40px;
+        width: 100%;
+        height: 50px;
+        border: 1px solid black;
+        border-radius: 15px;
     }
 }
