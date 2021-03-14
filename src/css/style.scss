@@ -3,10 +3,11 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 $form-width: 500px;
-$form-height: 150px;
+$form-height: 200px;
 
 .login-form {
     display: block;
@@ -14,7 +15,38 @@ $form-height: 150px;
     width: $form-width;
     height: $form-height;
     margin-top: 200px;
+    padding: 15px;
     left: calc(50% - #{$form-width}/2);
     background-color: rgb(204, 195, 195);
-    
+    border: 3px solid black;
+    border-radius: 15px;
+    font-size: 20px;
+
+    &__title {
+        width: fit-content;
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+
+    &__input {
+        margin-top: 15px;
+        width: 100%;
+        height: 40px;
+    }
+
+    &__button {
+        display: block;
+        width: 75%;
+        margin: 30px auto 0 auto;
+        height: 50px;
+        border: 2px solid black;
+        border-radius: 10px;
+        font-size: 20px;
+        
+        &:hover {
+            transform: scale(1.05);
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
 }
