@@ -1,10 +1,20 @@
 * {
+    position: relative;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+$form-width: 500px;
+$form-height: 150px;
+
 .login-form {
     display: block;
-    margin-top: 100px auto 0 auto;
+    position: absolute;
+    width: $form-width;
+    height: $form-height;
+    margin-top: 200px;
+    left: calc(50% - #{$form-width}/2);
+    background-color: rgb(204, 195, 195);
+    
 }
