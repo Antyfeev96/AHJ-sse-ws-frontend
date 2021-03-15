@@ -117,10 +117,20 @@ $form-height: 200px;
     &__member {
         display: flex;
         align-items: center;
-        background-color: yellow;
 
         &:nth-child(n + 2) {
             margin-top: 10px;
         }
+    }
+
+    &__avatar {
+        width: 50px;
+        height: 50px;
+        border: 1px solid grey;
+        border-radius: 50%;
+    }
+
+    &__username {
+        margin-left: 15px;
     }
 }
