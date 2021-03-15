@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHJ-sse-ws-frontend!!!</title>
-    <link href="css/style.scss" rel="stylesheet" type="text/html">
-</head>
-<body>
-    <!-- <form class="login-form">
+/* eslint-disable class-methods-use-this */
+export default class Layout {
+  constructor() {
+    this.init();
+    this.renderLoginForm();
+  }
+
+  renderLoginForm() {
+    return (`
+    <form class="login-form">
         <div class="login-form__title">Выберите псевдоним</div>
         <input placeholder="Введите псевдоним..." type="text" class="login-form__input">
         <button type="button" class="login-form__button">Продолжить</button>
-    </form> -->
-    <!-- <div class="chat">
+    </form>
+          `);
+  }
+
+  renderChat() {
+    return (`
+      <div class="chat">
         <div class="chat__messages">
             <div class="chat__message">
                 <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
@@ -63,6 +67,7 @@
                 <div class="chat__username">Homelander</div>
             </div>
         </div>
-    </div> -->
-</body>
-</html>
+    </div>
+      `);
+  }
+}
