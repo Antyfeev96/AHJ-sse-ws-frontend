@@ -7,13 +7,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
+  target: 'web',
   entry: './src/index.js',
   mode: 'development',
   output: {
     filename: 'bundle.js',
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin({}),
     new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({ filename: 'main.[contenthash].css' }),
     new HtmlWebpackPlugin({
@@ -67,12 +68,8 @@ module.exports = {
   },
 
   devServer: {
-    port: 8080,
     open: true,
-    host: 'localhost',
-    historyApiFallback: true,
-    contentBase: path.resolve(__dirname, './dist'),
-    compress: true,
-    hot: true,
+    contentBase: path.resolve(__dirname, './src/index.js'),
+    watchContentBase: true,
   },
 };
