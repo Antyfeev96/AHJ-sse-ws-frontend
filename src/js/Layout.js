@@ -1,10 +1,5 @@
 /* eslint-disable class-methods-use-this */
 export default class Layout {
-  constructor() {
-    this.init();
-    this.renderLoginForm();
-  }
-
   renderLoginForm() {
     return (`
     <form class="login-form">
