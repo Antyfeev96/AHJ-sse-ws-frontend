@@ -9,8 +9,8 @@ export default class AppController {
     this.body.innerHTML = this.layout.renderLoginForm();
     this.loginForm = this.body.querySelector('.login-form');
     this.loginForm.addEventListener('click', (e) => {
-      if (!e.target.classList.contains('login-form__button')) return;
       this.username = this.loginForm.querySelector('input').value;
+      if (!e.target.classList.contains('login-form__button') || this.username === '') return;
       this.loginForm.remove();
       this.body.innerHTML = this.layout.renderChat();
       this.initChat();
@@ -26,8 +26,9 @@ export default class AppController {
   }
 
   addChatListener(e) {
-    if (e.key !== 'Enter') return;
     const message = this.body.querySelector('input').value;
+    if (e.key !== 'Enter' || message === '') return;
     this.messages.innerHTML += this.layout.renderMyMessage(message);
+    this.api.load();
   }
 }

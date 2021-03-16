@@ -5,7 +5,10 @@ export default class API {
   }
 
   load() {
-    return fetch(this.url);
+    return fetch(`${this.url}sse`, {
+      method: 'GET',
+      headers: this.contentTypeHeader,
+    });
   }
 
   add(user) {
