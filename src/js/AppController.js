@@ -13,6 +13,7 @@ export default class AppController {
       if (!e.target.classList.contains('login-form__button') || this.username === '') return;
       this.loginForm.remove();
       this.body.innerHTML = this.layout.renderChat();
+      this.api.add(this.username);
       this.initChat();
     });
   }
@@ -29,6 +30,5 @@ export default class AppController {
     const message = this.body.querySelector('input').value;
     if (e.key !== 'Enter' || message === '') return;
     this.messages.innerHTML += this.layout.renderMyMessage(message);
-    this.api.load();
   }
 }

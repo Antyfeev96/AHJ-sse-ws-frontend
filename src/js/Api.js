@@ -4,24 +4,30 @@ export default class API {
     this.contentTypeHeader = { 'Content-Type': 'application/json' };
   }
 
-  load() {
-    return fetch(`${this.url}sse`, {
+  async load() {
+    const response = await fetch(`${this.url}sse`, {
       method: 'GET',
       headers: this.contentTypeHeader,
     });
+
+    return response;
   }
 
-  add(user) {
-    return fetch(this.url, {
+  async add(user) {
+    const response = await fetch(`${this.url}?method=POST`, {
       body: JSON.stringify(user),
       method: 'POST',
       headers: this.contentTypeHeader,
     });
+
+    return response;
   }
 
-  remove(id) {
-    return fetch(`${this.url}/${id}`, {
+  async remove(id) {
+    const response = await fetch(`${this.url}/${id}`, {
       method: 'DELETE',
     });
+
+    return response;
   }
 }
