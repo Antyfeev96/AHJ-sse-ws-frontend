@@ -3,4 +3,4 @@ import Layout from './Layout';
 
 const app = new AppController(new Layout());
 
-app.init();
+app.initLogin();

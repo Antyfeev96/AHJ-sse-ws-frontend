@@ -24,11 +24,11 @@ export default class Layout {
       `);
   }
 
-  renderMessage() {
+  renderMessage(name, message) {
     return (`
     <div class="chat__message">
-        <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-        <div class="chat__article">Hello there!</div>
+        <div class="chat__name">${name}, 21:29 14.03.2021</div>
+        <div class="chat__article">${message}</div>
     </div>
     `);
   }
