@@ -28,6 +28,6 @@ export default class AppController {
   addChatListener(e) {
     if (e.key !== 'Enter') return;
     const message = this.body.querySelector('input').value;
-    this.messages.innerHTML += this.layout.renderMessage(this.username, message);
+    this.messages.innerHTML += this.layout.renderMyMessage(message);
   }
 }

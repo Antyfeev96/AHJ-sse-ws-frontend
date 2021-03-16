@@ -75,11 +75,22 @@ $form-height: 200px;
         &:nth-child(n + 2) {
             margin-top: 15px;
         }
+
+        &_mine {
+            margin-left: auto;
+            margin-right: 50px;
+            text-align: right;
+            
+        }
     }
 
     &__name {
         color: grey;
         font-size: 12px;
+
+        &_mine {
+            color: orange;
+        }
     }
 
     &__article {

@@ -33,6 +33,15 @@ export default class Layout {
     `);
   }
 
+  renderMyMessage(message) {
+    return (`
+    <div class="chat__message chat__message_mine">
+        <div class="chat__name chat__name_mine">You, 21:29 14.03.2021</div>
+        <div class="chat__article">${message}</div>
+    </div>
+    `);
+  }
+
   renderMember(name) {
     this.name = name;
     return (`
