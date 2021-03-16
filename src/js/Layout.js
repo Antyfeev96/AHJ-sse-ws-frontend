@@ -14,55 +14,32 @@ export default class Layout {
     return (`
       <div class="chat">
         <div class="chat__messages">
-            <div class="chat__message">
-                <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-                <div class="chat__article">Hello there!</div>
-            </div>
-            <div class="chat__message">
-                <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-                <div class="chat__article">Hello there!</div>
-            </div>
-            <div class="chat__message">
-                <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-                <div class="chat__article">Hello there!</div>
-            </div>
-            <div class="chat__message">
-                <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-                <div class="chat__article">Hello there!</div>
-            </div>
-            <div class="chat__message">
-                <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-                <div class="chat__article">Hello there!</div>
-            </div>
-            <div class="chat__message">
-                <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-                <div class="chat__article">Hello there!</div>
-            </div>
-            <div class="chat__message">
-                <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
-                <div class="chat__article">Hello there!</div>
-            </div>
+            
         </div>
         <input type="text" class="chat__input">
         <div class="chat__members">
-            <div class="chat__member">
-                <div class="chat__avatar"></div>
-                <div class="chat__username">Alex</div>
-            </div>
-            <div class="chat__member">
-                <div class="chat__avatar"></div>
-                <div class="chat__username">Mishgangsta</div>
-            </div>
-            <div class="chat__member">
-                <div class="chat__avatar"></div>
-                <div class="chat__username">Joseph</div>
-            </div>
-            <div class="chat__member">
-                <div class="chat__avatar"></div>
-                <div class="chat__username">Homelander</div>
-            </div>
+            
         </div>
     </div>
       `);
+  }
+
+  renderMessage() {
+    return (`
+    <div class="chat__message">
+        <div class="chat__name">Mishgangsta, 21:29 14.03.2021</div>
+        <div class="chat__article">Hello there!</div>
+    </div>
+    `);
+  }
+
+  renderMember(name) {
+    this.name = name;
+    return (`
+    <div class="chat__member">
+        <div class="chat__avatar"></div>
+        <div class="chat__username">${this.name}</div>
+    </div>`
+    );
   }
 }
