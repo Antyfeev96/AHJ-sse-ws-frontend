@@ -1,8 +1,8 @@
 export default class AppController {
-  constructor(layout) {
+  constructor(layout, api) {
     this.layout = layout;
     this.body = document.body;
-    // this.api = api;
+    this.api = api;
   }
 
   initLogin() {
