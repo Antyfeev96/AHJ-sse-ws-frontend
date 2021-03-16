@@ -5,7 +5,7 @@ export default class API {
   }
 
   async load() {
-    const response = await fetch(`${this.url}sse`, {
+    const response = await fetch(`${this.url}users`, {
       method: 'GET',
       headers: this.contentTypeHeader,
     });

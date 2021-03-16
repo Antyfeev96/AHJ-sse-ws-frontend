@@ -1,11 +1,13 @@
 export default class AppController {
-  constructor(layout, api) {
+  constructor(layout, api, ws) {
     this.layout = layout;
     this.body = document.body;
     this.api = api;
+    this.ws = ws;
   }
 
   initLogin() {
+    this.ws.init();
     this.body.innerHTML = this.layout.renderLoginForm();
     this.loginForm = this.body.querySelector('.login-form');
     this.loginForm.addEventListener('click', (e) => {
@@ -15,6 +17,7 @@ export default class AppController {
       this.body.innerHTML = this.layout.renderChat();
       this.api.add(this.username);
       this.initChat();
+      this.api.load();
     });
   }
 
