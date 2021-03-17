@@ -19,7 +19,7 @@ export default class AppController {
       this.body.innerHTML = this.layout.renderChat();
       this.initChat();
       console.log(this.ws.send('users'));
-      const users = this.ws.send('users');
+      const users = await this.ws.send('users');
       console.log(users);
     });
   }
