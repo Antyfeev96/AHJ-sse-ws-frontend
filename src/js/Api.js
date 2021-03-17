@@ -10,6 +10,7 @@ export default class API {
       headers: this.contentTypeHeader,
     });
 
+    console.log(response);
     return response;
   }
 

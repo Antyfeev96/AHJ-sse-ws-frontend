@@ -1,8 +1,7 @@
 export default class AppController {
-  constructor(layout, api, ws) {
+  constructor(layout, ws) {
     this.layout = layout;
     this.body = document.body;
-    this.api = api;
     this.ws = ws;
   }
 
@@ -15,9 +14,8 @@ export default class AppController {
       if (!e.target.classList.contains('login-form__button') || this.username === '') return;
       this.loginForm.remove();
       this.body.innerHTML = this.layout.renderChat();
-      this.api.add(this.username);
       this.initChat();
-      this.api.load();
+      this.ws.getUsers(this.username);
     });
   }
 

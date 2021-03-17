@@ -12,12 +12,11 @@ export default class WS {
   }
 
   openListener() {
-    console.log('connected');
     this.ws.send('hello!');
   }
 
   messageListener(e) {
-    console.log(e);
+    console.log(e.data);
   }
 
   closeListener(e) {
@@ -26,5 +25,9 @@ export default class WS {
 
   errorListener() {
     console.log('error');
+  }
+
+  getUsers(data) {
+    this.ws.send(data);
   }
 }
