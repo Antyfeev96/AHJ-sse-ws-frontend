@@ -144,3 +144,18 @@ $form-height: 200px;
         margin-left: 15px;
     }
 }
+
+.error {
+    position: absolute;
+    left: 40%;
+    top: 50px;
+    width: 250px;
+    height: 100px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+
+    &__message {
+        margin-top: 10px;
+    }
+}
