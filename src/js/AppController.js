@@ -10,6 +10,28 @@ export default class AppController {
     this.initWS();
   }
 
+  initLogin() {
+    this.body.innerHTML = this.layout.renderLoginForm();
+    this.loginForm = this.body.querySelector('.login-form');
+    this.loginForm.addEventListener('click', (e) => this.sendUser(e));
+  }
+
+  initWS() {
+    this.ws.addEventListener('open', () => this.openListener());
+    this.ws.addEventListener('message', (e) => this.loginSuccessListener(e));
+    this.ws.addEventListener('message', (e) => this.loginFailListener(e));
+    this.ws.addEventListener('message', (e) => this.messageListener(e));
+    this.ws.addEventListener('close', (e) => this.closeListener(e));
+    this.ws.addEventListener('error', () => this.errorListener());
+  }
+
+  initChat() {
+    this.chat = this.body.querySelector('.chat');
+    this.members = this.chat.querySelector('.chat__members');
+    this.messages = this.chat.querySelector('.chat__messages');
+    document.addEventListener('keydown', (e) => this.addChatListener(e));
+  }
+
   sendUser(e) {
     this.username = this.loginForm.querySelector('input').value;
     if (!e.target.classList.contains('login-form__button') || this.username === '') return;
@@ -20,35 +42,26 @@ export default class AppController {
     this.ws.send(JSON.stringify(this.request));
   }
 
-  initLogin() {
-    this.body.innerHTML = this.layout.renderLoginForm();
-    this.loginForm = this.body.querySelector('.login-form');
-    this.loginForm.addEventListener('click', (e) => this.sendUser(e));
+  sendMessage(message) {
+    this.request = {
+      type: 'sendMessage',
+      name: this.username,
+      text: message,
+    };
+    this.ws.send(JSON.stringify(this.request));
   }
 
-  initChat() {
-    this.chat = this.body.querySelector('.chat');
-    this.members = this.chat.querySelector('.chat__members');
-    this.messages = this.chat.querySelector('.chat__messages');
-    document.addEventListener('keydown', (e) => this.addChatListener(e));
-  }
-
-  initWS() {
-    this.ws.addEventListener('open', () => this.openListener());
-    this.ws.addEventListener('message', (e) => this.loginSuccessListener(e));
-    this.ws.addEventListener('message', (e) => this.loginFailListener(e));
-    this.ws.addEventListener('close', (e) => this.closeListener(e));
-    this.ws.addEventListener('error', () => this.errorListener());
+  messageListener(e) {
+    this.response = JSON.parse(e.data);
+    for (const message of this.response) {
+      this.name = this.username === message.name ? 'You' : message.name;
+    }
   }
 
   addChatListener(e) {
     const message = this.body.querySelector('input').value;
     if (e.key !== 'Enter' || message === '') return;
-    this.messages.innerHTML += this.layout.renderMyMessage(message);
-  }
-
-  openListener() {
-    console.log('Server is open');
+    this.sendMessage(message);
   }
 
   loginSuccessListener(e) {
@@ -67,6 +80,10 @@ export default class AppController {
     this.response = e.data;
     this.initLogin();
     this.body.insertAdjacentElement('afterbegin', this.layout.renderError(e.data));
+  }
+
+  openListener() {
+    console.log('Server is open');
   }
 
   closeListener(e) {
