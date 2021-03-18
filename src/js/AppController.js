@@ -18,9 +18,7 @@ export default class AppController {
       this.loginForm.remove();
       this.body.innerHTML = this.layout.renderChat();
       this.initChat();
-      console.log(this.ws.send('users'));
-      const users = await this.ws.send('users');
-      console.log(users);
+      this.response = this.ws.send('users');
     });
   }
 
@@ -50,13 +48,8 @@ export default class AppController {
   }
 
   messageListener(e) {
-    const res = this.messageCallback(e.data);
-    console.log(res);
-    return res;
-  }
-
-  messageCallback(data) {
-    return JSON.parse(data);
+    const response = JSON.parse(e.data);
+    console.log(response);
   }
 
   closeListener(e) {
