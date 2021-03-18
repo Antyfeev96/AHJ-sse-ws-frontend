@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-debugger */
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
@@ -15,10 +16,11 @@ export default class AppController {
     this.loginForm.addEventListener('click', async (e) => {
       this.username = this.loginForm.querySelector('input').value;
       if (!e.target.classList.contains('login-form__button') || this.username === '') return;
-      this.loginForm.remove();
-      this.body.innerHTML = this.layout.renderChat();
-      this.initChat();
-      this.response = this.ws.send('users');
+      this.request = {
+        type: 'addUser',
+        name: this.username,
+      };
+      this.ws.send(JSON.stringify(this.request));
     });
   }
 
@@ -26,13 +28,13 @@ export default class AppController {
     this.chat = this.body.querySelector('.chat');
     this.members = this.chat.querySelector('.chat__members');
     this.messages = this.chat.querySelector('.chat__messages');
-    this.members.innerHTML = this.layout.renderMember(this.username);
     document.addEventListener('keydown', (e) => this.addChatListener(e));
   }
 
   initWS() {
     this.ws.addEventListener('open', () => this.openListener());
-    this.ws.addEventListener('message', (e) => this.messageListener(e));
+    this.ws.addEventListener('message', (e) => this.loginSuccessListener(e));
+    this.ws.addEventListener('message', (e) => this.loginFailListener(e));
     this.ws.addEventListener('close', (e) => this.closeListener(e));
     this.ws.addEventListener('error', () => this.errorListener());
   }
@@ -44,12 +46,25 @@ export default class AppController {
   }
 
   openListener() {
-    this.ws.send('hello!');
+    console.log('Server is open');
   }
 
-  messageListener(e) {
-    const response = JSON.parse(e.data);
-    console.log(response);
+  loginSuccessListener(e) {
+    if (e.data === 'error') return false;
+    this.loginForm.remove();
+    this.body.innerHTML = this.layout.renderChat();
+    this.initChat();
+    this.response = JSON.parse(e.data);
+    for (const member of this.response) {
+      this.members.insertAdjacentHTML('beforeend', this.layout.renderMember(member.name));
+    }
+  }
+
+  loginFailListener(e) {
+    if (e.data !== 'error') return;
+    this.response = e.data;
+    this.body.innerHTML += this.layout.renderError(this.response);
+    throw new Error('Никнейм занят');
   }
 
   closeListener(e) {

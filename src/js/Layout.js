@@ -48,7 +48,17 @@ export default class Layout {
     <div class="chat__member">
         <div class="chat__avatar"></div>
         <div class="chat__username">${this.name}</div>
-    </div>`
-    );
+    </div>
+    `);
+  }
+
+  renderError(error) {
+    this.error = error;
+    return (`
+    <div class='error'>
+      <div>${this.error}</div>
+      <div>Введите другой никнейм</div>
+    </div>
+    `);
   }
 }
