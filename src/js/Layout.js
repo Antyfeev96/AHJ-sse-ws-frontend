@@ -54,11 +54,14 @@ export default class Layout {
 
   renderError(error) {
     this.error = error;
-    return (`
-    <div class='error'>
-      <div>${this.error}</div>
-      <div>Введите другой никнейм</div>
-    </div>
-    `);
+    const div = document.createElement('div');
+    div.className = 'error';
+    const errorEl = document.createElement('div');
+    const messageEl = document.createElement('div');
+    errorEl.textContent = this.error;
+    messageEl.textContent = 'Введите другой никнейм';
+    div.insertAdjacentElement('afterbegin', errorEl);
+    div.insertAdjacentElement('beforeend', messageEl);
+    return div;
   }
 }

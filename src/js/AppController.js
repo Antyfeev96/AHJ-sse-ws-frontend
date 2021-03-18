@@ -7,21 +7,23 @@ export default class AppController {
     this.layout = layout;
     this.body = document.body;
     this.ws = new WebSocket('ws://localhost:7070/ws');
+    this.initWS();
+  }
+
+  sendUser(e) {
+    this.username = this.loginForm.querySelector('input').value;
+    if (!e.target.classList.contains('login-form__button') || this.username === '') return;
+    this.request = {
+      type: 'addUser',
+      name: this.username,
+    };
+    this.ws.send(JSON.stringify(this.request));
   }
 
   initLogin() {
-    this.initWS();
     this.body.innerHTML = this.layout.renderLoginForm();
     this.loginForm = this.body.querySelector('.login-form');
-    this.loginForm.addEventListener('click', async (e) => {
-      this.username = this.loginForm.querySelector('input').value;
-      if (!e.target.classList.contains('login-form__button') || this.username === '') return;
-      this.request = {
-        type: 'addUser',
-        name: this.username,
-      };
-      this.ws.send(JSON.stringify(this.request));
-    });
+    this.loginForm.addEventListener('click', (e) => this.sendUser(e));
   }
 
   initChat() {
@@ -50,7 +52,7 @@ export default class AppController {
   }
 
   loginSuccessListener(e) {
-    if (e.data === 'error') return false;
+    if (e.data === 'Никнейм занят') return;
     this.loginForm.remove();
     this.body.innerHTML = this.layout.renderChat();
     this.initChat();
@@ -61,10 +63,10 @@ export default class AppController {
   }
 
   loginFailListener(e) {
-    if (e.data !== 'error') return;
+    if (e.data !== 'Никнейм занят') return;
     this.response = e.data;
-    this.body.innerHTML += this.layout.renderError(this.response);
-    throw new Error('Никнейм занят');
+    this.initLogin();
+    this.body.insertAdjacentElement('afterbegin', this.layout.renderError(e.data));
   }
 
   closeListener(e) {
