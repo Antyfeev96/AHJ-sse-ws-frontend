@@ -63,12 +63,14 @@ export default class AppController {
       this.messages.insertAdjacentElement('beforeend', this.layout.renderMessage(this.name, message.text));
     }
     this.body.querySelector('input').value = '';
+    return false;
   }
 
   addChatListener(e) {
     this.input = this.body.querySelector('input').value;
     if (e.key !== 'Enter' || this.input === '') return;
     this.sendMessage(this.input);
+    return false;
   }
 
   loginSuccessListener(e) {
@@ -81,6 +83,7 @@ export default class AppController {
     for (const member of this.response) {
       this.members.insertAdjacentHTML('beforeend', this.layout.renderMember(member.name));
     }
+    return false;
   }
 
   loginFailListener(e) {
@@ -88,17 +91,21 @@ export default class AppController {
     this.response = e.data;
     this.initLogin();
     this.body.insertAdjacentElement('afterbegin', this.layout.renderError(e.data));
+    return false;
   }
 
   openListener() {
     console.log('Server is open');
+    return false;
   }
 
   closeListener(e) {
     console.log('connection closed', e);
+    return false;
   }
 
   errorListener() {
     console.log('error');
+    return false;
   }
 }
