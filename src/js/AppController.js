@@ -99,7 +99,7 @@ export default class AppController {
     if (e.wasClean) {
       console.log(`Соединение закрыто, код ${e.code}, причина ${e.reason}`);
     }
-    this.ws = new WebSocket('wss://localhost:7070/ws');
+    this.ws = new WebSocket('wss://ahj-sse-ws-backend.herokuapp.com/ws');
     this.initWS();
   }
 
