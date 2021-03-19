@@ -101,6 +101,8 @@ export default class AppController {
 
   closeListener(e) {
     console.log('connection closed', e);
+    this.ws = new WebSocket('wss://ahj-sse-ws-backend.herokuapp.com/ws');
+    this.initWS();
     return false;
   }
 
