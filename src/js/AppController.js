@@ -72,6 +72,7 @@ export default class AppController {
   }
 
   loginSuccessListener(e) {
+    console.log(e.data);
     if (e.data === 'Никнейм занят') return;
     if (JSON.parse(e.data)[0].text) return;
     this.loginForm.remove();
@@ -95,13 +96,11 @@ export default class AppController {
   }
 
   closeListener(e) {
-    console.log('connection closed', e);
-    this.ws = new WebSocket('wss://ahj-sse-ws-backend.herokuapp.com/ws');
-    this.ws.addEventListener('open', () => this.openListener());
-    this.ws.addEventListener('message', (evt) => this.messageListener(evt));
-    this.ws.addEventListener('close', (evt) => this.closeListener(evt));
-    this.ws.addEventListener('error', () => this.errorListener());
-    return false;
+    if (e.wasClean) {
+      console.log(`Соединение закрыто, код ${e.code}, причина ${e.reason}`);
+    }
+    // this.ws = new WebSocket('wss://localhost:7070/ws');
+    // this.initWS();
   }
 
   errorListener() {
