@@ -99,8 +99,8 @@ export default class AppController {
     if (e.wasClean) {
       console.log(`Соединение закрыто, код ${e.code}, причина ${e.reason}`);
     }
-    // this.ws = new WebSocket('wss://localhost:7070/ws');
-    // this.initWS();
+    this.ws = new WebSocket('wss://localhost:7070/ws');
+    this.initWS();
   }
 
   errorListener() {
