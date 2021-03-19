@@ -25,21 +25,36 @@ export default class Layout {
   }
 
   renderMessage(name, message) {
-    return (`
-    <div class="chat__message">
-        <div class="chat__name">${name}, 21:29 14.03.2021</div>
-        <div class="chat__article">${message}</div>
-    </div>
-    `);
+    const modifyMessageEl = name === 'You' ? ' chat__message_mine' : '';
+    const modifyNameEl = name === 'You' ? ' chat__name_mine' : '';
+    const messageEl = document.createElement('div');
+    messageEl.className = `chat__message${modifyMessageEl}`;
+    const nameEl = document.createElement('div');
+    nameEl.className = `chat__name${modifyNameEl}`;
+    nameEl.textContent = name + this.renderTime();
+    const articleEl = document.createElement('div');
+    articleEl.className = 'chat__article';
+    articleEl.textContent = message;
+    messageEl.insertAdjacentElement('afterbegin', nameEl);
+    messageEl.insertAdjacentElement('beforeend', articleEl);
+    return messageEl;
   }
 
-  renderMyMessage(message) {
-    return (`
-    <div class="chat__message chat__message_mine">
-        <div class="chat__name chat__name_mine">You, 21:29 14.03.2021</div>
-        <div class="chat__article">${message}</div>
-    </div>
-    `);
+  renderTime() {
+    const date = new Date();
+
+    const formatterHours = new Intl.DateTimeFormat('ru', {
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+
+    const formatterMonths = new Intl.DateTimeFormat('ru', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    });
+
+    return ` ${formatterHours.format(date)} ${formatterMonths.format(date)}`;
   }
 
   renderMember(name) {

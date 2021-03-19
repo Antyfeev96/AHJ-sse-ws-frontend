@@ -52,20 +52,28 @@ export default class AppController {
   }
 
   messageListener(e) {
+    if (e.data === 'Никнейм занят') return;
+    if (!JSON.parse(e.data)[0].text) return;
     this.response = JSON.parse(e.data);
+    while (this.messages.firstChild) {
+      this.messages.firstChild.remove();
+    }
     for (const message of this.response) {
       this.name = this.username === message.name ? 'You' : message.name;
+      this.messages.insertAdjacentElement('beforeend', this.layout.renderMessage(this.name, message.text));
     }
+    this.body.querySelector('input').value = '';
   }
 
   addChatListener(e) {
-    const message = this.body.querySelector('input').value;
-    if (e.key !== 'Enter' || message === '') return;
-    this.sendMessage(message);
+    this.input = this.body.querySelector('input').value;
+    if (e.key !== 'Enter' || this.input === '') return;
+    this.sendMessage(this.input);
   }
 
   loginSuccessListener(e) {
     if (e.data === 'Никнейм занят') return;
+    if (JSON.parse(e.data)[0].text) return;
     this.loginForm.remove();
     this.body.innerHTML = this.layout.renderChat();
     this.initChat();
