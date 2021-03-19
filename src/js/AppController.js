@@ -6,7 +6,7 @@ export default class AppController {
   constructor(layout) {
     this.layout = layout;
     this.body = document.body;
-    this.ws = new WebSocket('ws://localhost:7070/ws');
+    this.ws = new WebSocket('ws://ahj-sse-ws-backend.herokuapp.com/ws');
     this.initWS();
   }
 
